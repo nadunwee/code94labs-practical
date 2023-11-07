@@ -20,7 +20,7 @@ function Navigation() {
           <a href="/">
             <button
               type="button"
-              className="text-white bg-emerald-600 hover:bg-emerald-700 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+              className="inline-block rounded-lg border border-black px-8 py-3 text-center text-base font-semibold text-black transition hover:bg-black hover:text-white"
             >
               Refresh Page
             </button>

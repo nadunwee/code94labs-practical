@@ -51,9 +51,9 @@ function RecipeForm() {
 
           <button
             type="submit"
-            className="text-white bg-emerald-600 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+            className="inline-block rounded-lg border border-blue-700 px-2.5 py-1.5 text-center text-base font-semibold text-black transition hover:bg-blue-600 hover:border-blue-600 hover:text-white"
           >
-            Save
+            Save the Recipe
           </button>
         </form>
       </div>

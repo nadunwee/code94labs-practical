@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const DUMMY_DATA = [
   {
     id: "r1",
@@ -27,32 +29,32 @@ function Recipes() {
           key={event.id}
           className="bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-gray-100 hover:border-gray-200 "
         >
-          <a href="www.google.com">
+          <Link to={event.id}>
             <div className="p-5">
-              <a href="www.google.com">
+              <Link to={event.id}>
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                   {event.name}
                 </h5>
-              </a>
+              </Link>
               <p className="mb-2 font-normal text-gray-700">
                 {event.description}
               </p>
               <div>
                 <button
                   type="button"
-                  className="text-white bg-emerald-500 hover:bg-emerald-600 font-medium rounded-lg text-sm px-4 py-2 text-center mr-5  "
+                  className="inline-block mr-5 rounded-lg border border-blue-700 px-2.5 py-1.5 text-center text-base font-semibold text-black transition hover:bg-blue-600  hover:text-white"
                 >
                   Edit
                 </button>
                 <button
                   type="button"
-                  className="text-white bg-red-500 hover:bg-red-600 font-medium rounded-lg text-sm px-4 py-2 text-center md:mr-0"
+                  className="inline-block rounded-lg border border-red-700 px-2.5 py-1.5 text-center text-base font-semibold text-black transition hover:bg-red-600 hover:border-red-600 hover:text-white"
                 >
                   Delete
                 </button>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       ))}
     </div>
