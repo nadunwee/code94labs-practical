@@ -1,12 +1,14 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 require("dotenv/config");
 const recipesModel = require("./models/schemas");
 
 const app = express();
 
+app.use(express.json());
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -22,6 +24,26 @@ mongoose
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err));
 
+// send data to mongoDB
+app.post("/insert", async (req, res) => {
+  const { recipeID, name, ingredients, description } = req.body;
+
+  const formData = new recipesModel({
+    name: name,
+    ingredients: ingredients,
+    description: description,
+    recipeID: recipeID,
+  });
+
+  try {
+    await formData.save();
+    res.send("inserted data..");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// get data from mongoDB
 app.get("/recipes", (req, res) => {
   recipesModel
     .find()
@@ -29,7 +51,7 @@ app.get("/recipes", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-const port = process.env.PORT;
-const server = app.listen(port, () => {
-  console.log("server is running");
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+  console.log(`server is running on ${port}`);
 });

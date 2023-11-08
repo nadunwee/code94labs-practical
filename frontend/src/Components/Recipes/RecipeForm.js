@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { redirect } from "react-router-dom";
+import Axios from "axios";
 
 function RecipeForm() {
   const nameRef = useRef();
@@ -8,12 +10,34 @@ function RecipeForm() {
 
   function saveRecipeHandler(e) {
     e.preventDefault();
+
+    // save all the values in newRecipe
     const newRecipe = {
-      id: idRef.current.value,
+      recipeID: idRef.current.value,
       name: nameRef.current.value,
       ingredients: ingredientsRef.current.value,
       description: descriptionRef.current.value,
     };
+
+    // post newRecipe to backend
+    Axios.post("http://localhost:4000/insert", newRecipe)
+      .then((response) => {
+        idRef.current.value = "";
+        nameRef.current.value = "";
+        ingredientsRef.current.value = "";
+        descriptionRef.current.value = "";
+
+        if (response.status === 200) {
+          // redirect to another route
+          redirect("/");
+        } else {
+          // Handle error
+        }
+      })
+      .catch((error) => {
+        // Handle error
+        console.error(error);
+      });
   }
 
   return (
