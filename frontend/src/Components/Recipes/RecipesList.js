@@ -8,12 +8,12 @@ function RecipesList(props) {
     <div className="mt-24 ml-8 mr-8 mb-8 max-w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {props.recipes.data.map((recipe) => (
         <div
-          key={recipe.id}
+          key={recipe.recipeID}
           className="bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-gray-100 hover:border-gray-200 "
         >
-          <Link to={recipe.id}>
+          <Link to={recipe.recipeID}>
             <div className="p-5">
-              <Link to={recipe.id}>
+              <Link to={recipe.recipeID}>
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                   {recipe.name}
                 </h5>

@@ -1,15 +1,21 @@
-import RecipesList from "./RecipesList";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+import RecipesList from "./RecipesList";
 
 function Recipes() {
   const [recipe, setRecipe] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/recipes")
-      .then((recipe) => setRecipe(recipe))
-      .catch((err) => console.log(err));
+    async function fetchRecipes() {
+      try {
+        const response = await axios.get("http://localhost:4000/recipes");
+        setRecipe(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchRecipes();
   }, []);
 
   if (!recipe) {
