@@ -1,23 +1,22 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchRecipes } from "../../API/api";
 
 import RecipesList from "./RecipesList";
 
 function Recipes() {
   const [recipe, setRecipe] = useState([]);
 
-  // add redux here
-
+  // Fetch data to show all the recipes in homePage
   useEffect(() => {
-    async function fetchRecipes() {
+    async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:4000/recipes");
-        setRecipe(response);
+        const recipesData = await fetchRecipes();
+        setRecipe(recipesData);
       } catch (error) {
         console.log(error);
       }
     }
-    fetchRecipes();
+    fetchData();
   }, []);
 
   if (!recipe) {

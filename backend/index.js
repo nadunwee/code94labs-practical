@@ -19,6 +19,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Establish a connection
 mongoose
   .connect(process.env.DB_URI)
   .then(() => console.log("DB connected"))
@@ -51,7 +52,7 @@ app.get("/recipes", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-// Add this route to delete a recipe by recipeID
+// Delete the specific(recipeID) data in database
 app.delete("/recipes/:recipeID", async (req, res) => {
   const { recipeID } = req.params;
   console.log(`Received DELETE request for recipe with ID: ${recipeID}`);
@@ -69,7 +70,7 @@ app.delete("/recipes/:recipeID", async (req, res) => {
   }
 });
 
-// Add this route to update a recipe by recipeID
+// Update the specific(recipeID) data in database
 app.put("/recipes/:recipeID", async (req, res) => {
   const { recipeID } = req.params;
   const { name, ingredients, description } = req.body;

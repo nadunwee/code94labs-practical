@@ -1,42 +1,40 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 import EditRecipe from "../Components/Recipes/EditRecipe";
+import { fetchRecipes } from "../API/api";
 
 function EditRecipePage() {
   const params = useParams();
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
-  // add redux here
-
+  // Fetch the data to fill the input values in editRecipe Page
   useEffect(() => {
-    async function fetchRecipes() {
+    async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:4000/recipes");
-        setData(response.data);
+        const recipes = await fetchRecipes();
+        setData(recipes.data);
       } catch (error) {
         console.log(error);
       }
     }
-    fetchRecipes();
+    fetchData();
   }, []);
 
+  // Send updated data to backend
   function EditRecipeHandler(updatedRecipe) {
-    //content
     axios
       .put(`/recipes/${updatedRecipe.recipeID}`, updatedRecipe)
       .then((response) => {
         if (response.status === 200) {
-          // Recipe updated successfully
-          console.log("Recipe updated successfully");
+          navigate("/"); // navigate to home page if successfull
         } else {
-          // Handle error
           console.log("Recipe update failed");
         }
       })
       .catch((error) => {
-        // Handle error
         console.error(error);
       });
   }

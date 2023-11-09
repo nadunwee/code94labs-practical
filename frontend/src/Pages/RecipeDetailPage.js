@@ -1,25 +1,24 @@
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import RecipeDetail from "../Components/Recipes/RecipeDetail";
+import { fetchRecipes } from "../API/api";
 
 function RecipeDetailPage() {
-  const params = useParams();
+  const params = useParams(); // get the recipeID
   const [data, setData] = useState([]);
 
-  // add redux
-
+  // Fetch data to show data in recipeDetail page
   useEffect(() => {
-    async function fetchRecipes() {
+    async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:4000/recipes");
+        const response = await fetchRecipes();
         setData(response.data);
       } catch (error) {
         console.log(error);
       }
     }
-    fetchRecipes();
+    fetchData();
   }, []);
 
   // Find the recipe with same recipeID
