@@ -9,7 +9,7 @@ function RecipeForm(props) {
   function saveRecipeHandler(e) {
     e.preventDefault();
 
-    // save all the values in newRecipe
+    // save all the user entered values in newRecipe
     const newRecipe = {
       recipeID: idRef.current.value,
       name: nameRef.current.value,
@@ -17,8 +17,10 @@ function RecipeForm(props) {
       description: descriptionRef.current.value,
     };
 
-    //sed request
+    // send newRecipe to NewRecipePage
     props.onAddRecipe(newRecipe);
+
+    // Change all the values after sending data
     idRef.current.value = "";
     nameRef.current.value = "";
     ingredientsRef.current.value = "";

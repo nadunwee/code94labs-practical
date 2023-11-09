@@ -6,6 +6,8 @@ import RecipesList from "./RecipesList";
 function Recipes() {
   const [recipe, setRecipe] = useState([]);
 
+  // add redux here
+
   useEffect(() => {
     async function fetchRecipes() {
       try {
@@ -22,11 +24,7 @@ function Recipes() {
     return;
   }
 
-  return (
-    <div className="mt-20">
-      <RecipesList recipes={recipe} />
-    </div>
-  );
+  return <RecipesList recipes={recipe} />;
 }
 
 export default Recipes;

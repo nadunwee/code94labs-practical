@@ -6,6 +6,7 @@ function EditRecipe(props) {
   const descriptionRef = useRef();
   const idRef = useRef();
 
+  // Check if there's values in recipe
   if (!props.recipe) {
     return;
   }
@@ -13,7 +14,7 @@ function EditRecipe(props) {
   function saveRecipeHandler(e) {
     e.preventDefault();
 
-    // save all the values in newRecipe
+    // save all the values in updateRecipe
     const updatedRecipe = {
       recipeID: idRef.current.value,
       name: nameRef.current.value,
@@ -21,9 +22,10 @@ function EditRecipe(props) {
       description: descriptionRef.current.value,
     };
 
-    //sed request
+    //sed request to EditRecipePage to send to the backend
     props.onEditRecipe(updatedRecipe);
-    idRef.current.value = "";
+
+    // Change the values after sending data
     nameRef.current.value = "";
     ingredientsRef.current.value = "";
     descriptionRef.current.value = "";

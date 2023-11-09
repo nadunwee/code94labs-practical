@@ -1,12 +1,14 @@
 import axios from "axios";
-
-import RecipeDetail from "../Components/Recipes/RecipeDetail";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import RecipeDetail from "../Components/Recipes/RecipeDetail";
 
 function RecipeDetailPage() {
   const params = useParams();
   const [data, setData] = useState([]);
+
+  // add redux
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -20,13 +22,10 @@ function RecipeDetailPage() {
     fetchRecipes();
   }, []);
 
+  // Find the recipe with same recipeID
   const recipe = data.find((recipe) => recipe.recipeID === params.recipeId);
 
-  return (
-    <>
-      <RecipeDetail recipe={recipe} />
-    </>
-  );
+  return <RecipeDetail recipe={recipe} />;
 }
 
 export default RecipeDetailPage;

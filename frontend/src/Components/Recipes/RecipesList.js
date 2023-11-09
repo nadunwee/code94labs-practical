@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function RecipesList(props) {
   let navigate = useNavigate();
+
   if (!props.recipes.data) {
     return;
   }
@@ -16,15 +17,15 @@ function RecipesList(props) {
 
     if (confirmDelete) {
       try {
-        Axios.delete(`/recipes/${recipeID}`);
-        window.location.reload();
+        axios.delete(`/recipes/${recipeID}`);
+        window.location.reload(); // Reload the page
       } catch (error) {
-        console.log(recipeID);
         console.error("An error occurred:", error);
       }
     }
   }
 
+  // Redirect to edit route
   function routeChange(ID) {
     let path = `/editrecipe/${ID}`;
     navigate(path);

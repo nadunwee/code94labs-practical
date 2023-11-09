@@ -1,16 +1,19 @@
 import { useParams } from "react-router-dom";
-import EditRecipe from "../Components/Recipes/EditRecipe";
 import { useEffect, useState } from "react";
-import Axios from "axios";
+import axios from "axios";
+
+import EditRecipe from "../Components/Recipes/EditRecipe";
 
 function EditRecipePage() {
   const params = useParams();
   const [data, setData] = useState([]);
 
+  // add redux here
+
   useEffect(() => {
     async function fetchRecipes() {
       try {
-        const response = await Axios.get("http://localhost:4000/recipes");
+        const response = await axios.get("http://localhost:4000/recipes");
         setData(response.data);
       } catch (error) {
         console.log(error);
@@ -21,8 +24,8 @@ function EditRecipePage() {
 
   function EditRecipeHandler(updatedRecipe) {
     //content
-    console.log(`edited redipe ${updatedRecipe.redipeID}`);
-    Axios.put(`/recipes/${updatedRecipe.recipeID}`, updatedRecipe)
+    axios
+      .put(`/recipes/${updatedRecipe.recipeID}`, updatedRecipe)
       .then((response) => {
         if (response.status === 200) {
           // Recipe updated successfully
@@ -38,7 +41,9 @@ function EditRecipePage() {
       });
   }
 
+  // Find the Recipe with same recipeID
   const recipe = data.find((recipe) => recipe.recipeID === params.recipeId);
+
   return <EditRecipe recipe={recipe} onEditRecipe={EditRecipeHandler} />;
 }
 

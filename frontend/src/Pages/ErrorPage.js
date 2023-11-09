@@ -1,11 +1,7 @@
 import Error from "../Components/Layout/Error";
 
 function ErrorPage() {
-  return (
-    <>
-      <Error />
-    </>
-  );
+  return <Error />;
 }
 
 export default ErrorPage;
