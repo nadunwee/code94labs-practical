@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function RecipesList(props) {
+  const recipes = useSelector((state) => state.recipes);
   let navigate = useNavigate();
 
-  if (!props.recipes.data) {
+  if (!recipes.data) {
+    console.log("no recipe data");
     return;
   }
 
@@ -25,7 +28,7 @@ function RecipesList(props) {
     }
   }
 
-  // Redirect to edit route
+  // Redirect to edit route when click on edit
   function routeChange(ID) {
     let path = `/editrecipe/${ID}`;
     navigate(path);
@@ -33,7 +36,7 @@ function RecipesList(props) {
 
   return (
     <div className="mt-24 ml-8 mr-8 mb-8 max-w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      {props.recipes.data.map((recipe) => (
+      {recipes.data.map((recipe) => (
         <div
           key={recipe.recipeID}
           className="bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-gray-100 hover:border-gray-200  "

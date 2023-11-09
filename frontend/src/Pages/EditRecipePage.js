@@ -7,8 +7,8 @@ import { fetchRecipes } from "../API/api";
 
 function EditRecipePage() {
   const params = useParams();
-  const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
 
   // Fetch the data to fill the input values in editRecipe Page
   useEffect(() => {
