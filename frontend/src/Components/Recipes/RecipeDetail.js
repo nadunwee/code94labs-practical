@@ -1,6 +1,5 @@
 function RecipeDetail(props) {
   if (!props.recipe) {
-    console.log("done");
     return;
   }
   return (

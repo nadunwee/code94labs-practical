@@ -21,7 +21,7 @@ function RecipeDetailPage() {
   }, []);
 
   const recipe = data.find((recipe) => recipe.recipeID === params.recipeId);
-  console.log(recipe);
+
   return (
     <>
       <RecipeDetail recipe={recipe} />

@@ -51,6 +51,24 @@ app.get("/recipes", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+// Add this route to delete a recipe by recipeID
+app.delete("/recipes/:recipeID", async (req, res) => {
+  const { recipeID } = req.params;
+  console.log(`Received DELETE request for recipe with ID: ${recipeID}`);
+
+  try {
+    const deletedRecipe = await recipesModel.findOneAndDelete({ recipeID });
+    if (deletedRecipe) {
+      res.status(200).json({ message: "Recipe deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Recipe not found" });
+    }
+  } catch (err) {
+    console.error("An error occurred:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`server is running on ${port}`);
