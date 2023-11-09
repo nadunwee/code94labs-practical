@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const initialState = { recipes: {} };
+const initialState = { recipes: [] };
 
 const recipeSlice = createSlice({
   name: "recipes",

@@ -1,5 +1,4 @@
 function RecipeDetail(props) {
-  // Check if there's anything in recipe
   if (!props.recipe) {
     return;
   }

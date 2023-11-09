@@ -1,13 +1,21 @@
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 
 function EditRecipe(props) {
+  const recipes = useSelector((state) => state.recipes);
+
+  // Find the Recipe with same recipeID
+  const recipe = recipes.find(
+    (recipe) => recipe.recipeID === props.params.recipeId
+  );
+
   const nameRef = useRef();
   const ingredientsRef = useRef();
   const descriptionRef = useRef();
   const idRef = useRef();
 
   // Check if there's values in recipe
-  if (!props.recipe) {
+  if (!recipe) {
     return;
   }
 
@@ -49,7 +57,7 @@ function EditRecipe(props) {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               placeholder="Recipe 1"
               autoComplete="off"
-              value={props.recipe.recipeID}
+              value={recipe.recipeID}
               ref={idRef}
               disabled="true"
               required
@@ -68,7 +76,7 @@ function EditRecipe(props) {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               placeholder="Recipe 1"
               autoComplete="off"
-              defaultValue={props.recipe.name}
+              defaultValue={recipe.name}
               ref={nameRef}
               required
             />
@@ -85,7 +93,7 @@ function EditRecipe(props) {
               rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300   "
               placeholder="2 Carrots, Tomato..."
-              defaultValue={props.recipe.ingredients}
+              defaultValue={recipe.ingredients}
               ref={ingredientsRef}
             ></textarea>
           </div>
@@ -101,7 +109,7 @@ function EditRecipe(props) {
               rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300   "
               placeholder="This Recipe is special..."
-              defaultValue={props.recipe.description}
+              defaultValue={recipe.description}
               ref={descriptionRef}
             ></textarea>
           </div>

@@ -1,21 +1,21 @@
 import RecipeForm from "../Components/Recipes/RecipeForm";
 import Axios from "axios";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function NewRecipePage() {
+  const navigate = useNavigate();
+
   function AddRecipeHandler(newRecipe) {
-    // post newRecipe to backend
+    // Send newRecipe data to backend
     Axios.post("http://localhost:4000/insert", newRecipe)
       .then((response) => {
         if (response.status === 200) {
-          // redirect to another route
-          redirect("/");
+          navigate("/"); // navigate to home page if successfull
         } else {
-          // Handle error
+          console.log("No Recipe Added");
         }
       })
       .catch((error) => {
-        // Handle error
         console.error(error);
       });
   }

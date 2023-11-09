@@ -4,7 +4,7 @@ import axios from "axios";
 export async function fetchRecipes() {
   try {
     const response = await axios.get("http://localhost:4000/recipes");
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;

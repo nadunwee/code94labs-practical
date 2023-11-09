@@ -1,9 +1,9 @@
-import Recipes from "../Components/Recipes/Recipes";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { fetchRecipes } from "../API/api";
-import { useDispatch } from "react-redux";
 import { recipeAction } from "../Store/recipe_slice";
+import RecipesList from "../Components/Recipes/RecipesList";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function HomePage() {
     fetchData();
   }, [dispatch]);
 
-  return <Recipes />;
+  return <RecipesList />;
 }
 
 export default HomePage;

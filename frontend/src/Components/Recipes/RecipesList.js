@@ -3,16 +3,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function RecipesList(props) {
+function RecipesList() {
   const recipes = useSelector((state) => state.recipes);
   let navigate = useNavigate();
 
-  if (!recipes.data) {
+  if (!recipes) {
+    console.log(recipes);
     console.log("no recipe data");
     return;
   }
 
-  // Handler for deleting a recipe
+  // Handler that send delete data to backend
   function deleteBtnHandler(recipeID) {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this recipe?"
@@ -36,7 +37,7 @@ function RecipesList(props) {
 
   return (
     <div className="mt-24 ml-8 mr-8 mb-8 max-w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      {recipes.data.map((recipe) => (
+      {recipes.map((recipe) => (
         <div
           key={recipe.recipeID}
           className="bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-gray-100 hover:border-gray-200  "

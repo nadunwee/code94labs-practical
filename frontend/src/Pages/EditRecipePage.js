@@ -1,27 +1,30 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 import EditRecipe from "../Components/Recipes/EditRecipe";
 import { fetchRecipes } from "../API/api";
+import { recipeAction } from "../Store/recipe_slice";
 
 function EditRecipePage() {
-  const params = useParams();
+  const dispatch = useDispatch();
+
+  const params = useParams(); // Get the recipeID
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
 
   // Fetch the data to fill the input values in editRecipe Page
   useEffect(() => {
     async function fetchData() {
       try {
         const recipes = await fetchRecipes();
-        setData(recipes.data);
+        dispatch(recipeAction.allRecipes(recipes));
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   // Send updated data to backend
   function EditRecipeHandler(updatedRecipe) {
@@ -39,10 +42,7 @@ function EditRecipePage() {
       });
   }
 
-  // Find the Recipe with same recipeID
-  const recipe = data.find((recipe) => recipe.recipeID === params.recipeId);
-
-  return <EditRecipe recipe={recipe} onEditRecipe={EditRecipeHandler} />;
+  return <EditRecipe params={params} onEditRecipe={EditRecipeHandler} />;
 }
 
 export default EditRecipePage;
