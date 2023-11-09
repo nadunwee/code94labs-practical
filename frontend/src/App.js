@@ -5,6 +5,7 @@ import HomePage from "./Pages/HomePage";
 import NewRecipePage from "./Pages/NewRecipePage";
 import ErrorPage from "./Pages/ErrorPage";
 import RecipeDetailPage from "./Pages/RecipeDetailPage";
+import EditRecipePage from "./Pages/EditRecipePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ function App() {
           element: <RecipeDetailPage />,
         },
         { path: "/newrecipe", element: <NewRecipePage /> },
+        { path: "/editrecipe/:recipeId", element: <EditRecipePage /> },
       ],
     },
   ]);

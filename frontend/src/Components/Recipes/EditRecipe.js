@@ -1,16 +1,20 @@
 import { useRef } from "react";
 
-function RecipeForm(props) {
+function EditRecipe(props) {
   const nameRef = useRef();
   const ingredientsRef = useRef();
   const descriptionRef = useRef();
   const idRef = useRef();
 
+  if (!props.recipe) {
+    return;
+  }
+
   function saveRecipeHandler(e) {
     e.preventDefault();
 
     // save all the values in newRecipe
-    const newRecipe = {
+    const updatedRecipe = {
       recipeID: idRef.current.value,
       name: nameRef.current.value,
       ingredients: ingredientsRef.current.value,
@@ -18,7 +22,7 @@ function RecipeForm(props) {
     };
 
     //sed request
-    props.onAddRecipe(newRecipe);
+    props.onEditRecipe(updatedRecipe);
     idRef.current.value = "";
     nameRef.current.value = "";
     ingredientsRef.current.value = "";
@@ -43,7 +47,9 @@ function RecipeForm(props) {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               placeholder="Recipe 1"
               autoComplete="off"
+              value={props.recipe.recipeID}
               ref={idRef}
+              disabled="true"
               required
             />
           </div>
@@ -60,6 +66,7 @@ function RecipeForm(props) {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               placeholder="Recipe 1"
               autoComplete="off"
+              defaultValue={props.recipe.name}
               ref={nameRef}
               required
             />
@@ -76,6 +83,7 @@ function RecipeForm(props) {
               rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300   "
               placeholder="2 Carrots, Tomato..."
+              defaultValue={props.recipe.ingredients}
               ref={ingredientsRef}
             ></textarea>
           </div>
@@ -91,6 +99,7 @@ function RecipeForm(props) {
               rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300   "
               placeholder="This Recipe is special..."
+              defaultValue={props.recipe.description}
               ref={descriptionRef}
             ></textarea>
           </div>
@@ -99,7 +108,7 @@ function RecipeForm(props) {
             type="submit"
             className="inline-block rounded-lg border border-blue-700 px-2.5 py-1.5 text-center text-base font-semibold text-black transition hover:bg-blue-600 hover:border-blue-600 hover:text-white"
           >
-            Add the Recipe
+            Save the Recipe
           </button>
         </form>
       </div>
@@ -107,4 +116,4 @@ function RecipeForm(props) {
   );
 }
 
-export default RecipeForm;
+export default EditRecipe;

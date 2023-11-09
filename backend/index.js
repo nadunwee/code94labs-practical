@@ -69,6 +69,29 @@ app.delete("/recipes/:recipeID", async (req, res) => {
   }
 });
 
+// Add this route to update a recipe by recipeID
+app.put("/recipes/:recipeID", async (req, res) => {
+  const { recipeID } = req.params;
+  const { name, ingredients, description } = req.body;
+
+  try {
+    const updatedRecipe = await recipesModel.findOneAndUpdate(
+      { recipeID },
+      { name, ingredients, description },
+      { new: true }
+    );
+
+    if (updatedRecipe) {
+      res.status(200).json(updatedRecipe);
+    } else {
+      res.status(404).json({ message: "Recipe not found" });
+    }
+  } catch (err) {
+    console.error("An error occurred:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`server is running on ${port}`);

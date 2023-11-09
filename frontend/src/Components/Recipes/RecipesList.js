@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function RecipesList(props) {
+  let navigate = useNavigate();
   if (!props.recipes.data) {
     return;
   }
@@ -21,6 +23,11 @@ function RecipesList(props) {
         console.error("An error occurred:", error);
       }
     }
+  }
+
+  function routeChange(ID) {
+    let path = `/editrecipe/${ID}`;
+    navigate(path);
   }
 
   return (
@@ -47,6 +54,7 @@ function RecipesList(props) {
             <button
               type="button"
               className="inline-block mr-5 rounded-lg border border-blue-700 px-2.5 py-1.5 text-center text-base font-semibold text-black transition hover:bg-blue-600  hover:text-white"
+              onClick={() => routeChange(recipe.recipeID)}
             >
               Edit
             </button>
