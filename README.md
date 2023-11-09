@@ -1,5 +1,3 @@
-# Deployed Link
-
 # Getting Started
 ```
 clone repository
